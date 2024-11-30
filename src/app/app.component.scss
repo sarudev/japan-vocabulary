@@ -21,8 +21,8 @@
     text-align: center;
 
     .kanji {
-      font-size: 2.25rem;
-      line-height: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
       padding: 3rem 0;
     }
 
@@ -32,8 +32,8 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-      font-size: 7rem;
-      line-height: 1;
+      font-size: 2.25rem;
+      line-height: 2.5rem;
 
       &:hover {
         color: #737373;
@@ -189,6 +189,42 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .wrapper .container {
+    .kanji {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+
+    .word {
+      font-size: 3.75rem;
+      line-height: 1;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper .container {
+    .kanji {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+
+    .word {
+      font-size: 6rem;
+      line-height: 1;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .wrapper .container {
+    .word {
+      font-size: 7rem;
     }
   }
 }

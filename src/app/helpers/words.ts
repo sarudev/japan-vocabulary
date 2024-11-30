@@ -68,8 +68,9 @@ export const words: Word[] = [
   { kanji: '失礼ですが', word: 'しつれいですが', translation: 'Perdóname, pero...' },
   { kanji: 'お名前は', word: 'おなまえは', translation: '¿Cuál es tu nombre?', particles: { は: [4] } },
   { kanji: '初めまして', word: 'はじめまして', translation: 'Mucho gusto' },
-  { word: 'どうぞよろしくおねがいします', translation: 'Encantado de conocerlo' },
+  { word: 'どうぞ', translation: 'Encantado (de conocerlo)' },
+  { word: 'よろしく', translation: 'Saludo' },
   { kanji: '此方は～さんです', word: 'こちらは～さんです', translation: 'Este es el Sr. / Sra. ～', particles: { は: [3] } },
-  { kanji: '～から来ました', word: '～からきました', translation: 'Vengo desde ～' },
-  { kanji: '', word: '', translation: '' }
+  { kanji: '～から来ました', word: '～からきました', translation: 'Vengo desde ～' }
+  // { kanji: '', word: '', translation: '' }
 ]
