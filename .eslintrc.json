@@ -1,0 +1,46 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": "standard-with-typescript",
+  "overrides": [
+    {
+      "env": {
+        "node": true
+      },
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "sourceType": "script"
+      }
+    }
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": [
+      "./tsconfig.json"
+    ],
+    "sourceType": "module"
+  },
+  "rules": {
+    "@typescript-eslint/consistent-type-imports": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/prefer-readonly": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/array-type": "off",
+    "curly": [
+      "warn",
+      "multi-or-nest"
+    ],
+    "@typescript-eslint/naming-convention": "warn",
+    "accessor-pairs": "off",
+    "no-return-assign": "off",
+    "no-prototype-builtins": "off",
+    "no-unreachable": "warn"
+  }
+}

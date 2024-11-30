@@ -1,0 +1,194 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0 3rem;
+  color: white;
+
+  &.correct {
+    color: #86efac;
+  }
+
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .15s;
+
+  .container {
+    text-align: center;
+
+    .kanji {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+      padding: 3rem 0;
+    }
+
+    .word {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-size: 7rem;
+      line-height: 1;
+
+      &:hover {
+        color: #737373;
+      }
+
+      .character {
+        position: relative;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+        padding: 0;
+
+        &:hover {
+          color: white;
+        }
+
+        &:focus .romaji {
+          opacity: 1;
+        }
+
+        .romaji {
+          position: absolute;
+          width: 100%;
+          top: 100%;
+          left: 0;
+          opacity: 0;
+          font-size: 1.25rem;
+          line-height: 1.75rem;
+          transition: opacity .1s cubic-bezier(.4, 0, .2, 1);
+          user-select: none;
+          padding-top: .75rem;
+          color: white;
+        }
+      }
+    }
+
+    .translation {
+      font-size: 1.5rem;
+      line-height: 2rem;
+      padding: 3rem 0;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+  }
+
+  .input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+
+    form {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+      border-radius: 999px;
+      box-shadow: 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 0 #0000, 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
+      transition: all .15s cubic-bezier(.4, 0, .2, 1);
+      border-width: 1px;
+      border-color: #262626;
+      background-color: #171717;
+      max-width: 12rem;
+
+      &.expanded {
+        max-width: 36rem;
+      }
+
+      .press-enter {
+        position: absolute;
+        bottom: 100%;
+        width: 100%;
+        text-align: center;
+        font-size: .875rem;
+        line-height: 1.25rem;
+        margin-bottom: .5rem;
+        z-index: -10;
+        opacity: .5;
+        color: white;
+      }
+
+      .successes {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+
+        .number-container {
+          font-variant-numeric: slashed-zero tabular-nums;
+          line-height: 1;
+          height: 100%;
+          width: 100%;
+          position: relative;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          color: #737373;
+          font-size: .875rem;
+          padding-left: 1.25rem;
+
+          .number-hidden {
+            position: relative;
+            width: .5rem;
+            height: 1em;
+            overflow: hidden;
+
+            .number {
+              position: absolute;
+            }
+          }
+        }
+      }
+
+      input {
+        padding: .75rem 1rem;
+        width: 100%;
+        outline: none;
+        text-align: center;
+        background-color: transparent;
+        color: white;
+      }
+
+      .send-button-container {
+        position: absolute;
+        z-index: 10;
+        right: 0;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .5rem;
+
+        .send-button {
+          display: flex;
+          height: 2rem;
+          width: 2rem;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9999px;
+          outline: 2px solid transparent;
+          outline-offset: 2px;
+          transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+          transition-timing-function: cubic-bezier(.4,0,.2,1);
+          transition-duration: .15s;
+          color: #737373;
+
+          &:focus, &:hover {
+            background-color: #262626;
+          }
+        }
+      }
+    }
+  }
+}
