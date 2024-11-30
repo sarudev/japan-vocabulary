@@ -41,7 +41,7 @@ export class アップコンポーネント {
   constructor () {
     this.form.controls.kana.valueChanges.subscribe(value => {
       const correctValue = romanize(this.current.word, this.current.particles, this.kanaConfig).join('')
-      this.correct = value?.trim() === correctValue
+      this.correct = value?.trim().replace(' ', '') === correctValue
     })
 
     this.onSubmit(true)
