@@ -1,4 +1,22 @@
-<div class="wrapper" [class.correct]="correct">
+<div class="wrapper" [class.correct]="isCorrect">
+  <div class="buttons-container container-with-poadding">
+    <div class="actions">
+      <button class="btn" type="button" (click)="uploadFile()">
+        <upload-icon />
+      </button>
+      <button class="btn" type="button" (click)="newFile()">
+        <edit-icon />
+      </button>
+      <button
+        class="btn"
+        type="button"
+        [disabled]="words.length < 1"
+        (click)="downloadFile()"
+      >
+        <download-icon />
+      </button>
+    </div>
+  </div>
   @if (newWord) {
     <div
       class="container"
@@ -10,7 +28,7 @@
         {{ current.kanji ?? "&nbsp;" }}
       </div>
       <div class="word">
-        @for (character of current.kana; track $index) {
+        @for (character of current.separatedKana; track $index) {
           <button class="character group">
             <span class="kana">{{ character }}</span>
             <span class="romaji opacity-0 group-focus:opacity-100">
@@ -20,7 +38,7 @@
         }
       </div>
       <div class="translation">
-        @if (correct) {
+        @if (isCorrect) {
           <div [@containerTranslationEnterSlideDown]>
             {{ current.translation }}
           </div>
@@ -32,7 +50,7 @@
   } @else {
     &nbsp;
   }
-  <div class="input-container">
+  <div class="input-container container-with-poadding">
     <form
       [class.expanded]="formExpanded"
       [formGroup]="form"
@@ -85,13 +103,13 @@
         (focusout)="onFocusOut()"
       />
 
-      @if (correct && counter === 0) {
+      @if (isCorrect && counter === 0) {
         <div class="press-enter" [@pressEnterLeaveSlide]>
           Press ⏎ to proceed...
         </div>
       }
 
-      @if (correct) {
+      @if (isCorrect) {
         <div class="send-button-container" [@submitEnterLeaveSlide]>
           <button class="send-button" type="submit">
             <enter-icon />
@@ -101,3 +119,123 @@
     </form>
   </div>
 </div>
+
+@if (modal.show) {
+  <div class="dialog" role="dialog" aria-modal="true">
+    <div class="backdrop" [@containerEnterLeaveOpacity]></div>
+    <div class="modal-wrapper">
+      <div class="modal-container">
+        @if (!modal.closing) {
+          <div class="modal" [@modalEnterLeaveSlide]>
+            <div class="header">
+              @switch (modal.section) {
+                @case ("upload") {
+                  <div>Subir archivo</div>
+                }
+                @case ("new-edit") {
+                  <div>Editar set</div>
+                }
+              }
+              <button class="close-btn" type="button" (click)="closeModal()">
+                <close-icon />
+              </button>
+            </div>
+            <div class="content">
+              @switch (modal.section) {
+                @case ("upload") {
+                  <div class="upload">
+                    <div class="upload-container" id="upload-container">
+                      <upload-icon class="upload-icon"></upload-icon>
+                      <p id="upload-message">
+                        Arrastra y suelta un archivo aquí o haz clic para cargar
+                      </p>
+                      <input
+                        type="file"
+                        class="upload-input"
+                        accept=".json"
+                        id="upload-input"
+                      />
+                    </div>
+                  </div>
+                }
+                @case ("new-edit") {
+                  <div class="new-edit">
+                    @for (word of words; track $index) {
+                      <div class="word-item">
+                        <div class="group">
+                          <label for="{{ $index }}-kanji">Kanji</label>
+                          <input
+                            [value]="word.kanji ?? ''"
+                            (input)="
+                              onInputChange($index, 'kanji', $event.target!)
+                            "
+                            autocomplete="off"
+                            id="{{ $index }}-kanji"
+                            class="word-input"
+                            aria-label="Kanji"
+                          />
+                        </div>
+                        <div class="group">
+                          <label for="{{ $index }}-kana">Kana</label>
+                          <input
+                            [value]="word.kana"
+                            (input)="
+                              onInputChange($index, 'kana', $event.target!)
+                            "
+                            autocomplete="off"
+                            id="{{ $index }}-kana"
+                            class="word-input"
+                            [class.invalid]="word.kana.length === 0"
+                            aria-label="Kana"
+                            required
+                          />
+                        </div>
+                        <div class="group">
+                          <label for="{{ $index }}-translation">
+                            Traducción
+                          </label>
+                          <input
+                            [value]="word.translation"
+                            (input)="
+                              onInputChange(
+                                $index,
+                                'translation',
+                                $event.target!
+                              )
+                            "
+                            autocomplete="off"
+                            id="{{ $index }}-translation"
+                            class="word-input"
+                            [class.invalid]="word.translation.length === 0"
+                            aria-label="Translation"
+                            required
+                          />
+                        </div>
+                        <div class="close-btn-container">
+                          <button
+                            class="close-btn"
+                            type="button"
+                            (click)="removeWord($index)"
+                          >
+                            <close-icon />
+                          </button>
+                        </div>
+                      </div>
+                    }
+                    <button
+                      class="new-word"
+                      (click)="addNewWord()"
+                      [disabled]="!canAddNewWord"
+                    >
+                      Agregar
+                    </button>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

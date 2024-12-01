@@ -7,7 +7,7 @@
   border-width: 0;
   border-style: solid;
   border-color: #e5e5e5;
-  font-family: sans-serif;
+  font-family: Inter, sans-serif;
   font-feature-settings: normal;
   font-variation-settings: normal;
 }
@@ -22,4 +22,18 @@ html, body {
   $minpx: 8;
   $maxres: 1080;
   $minres: 400;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+  background-color: #171717 !important;
+  color: white !important;
+}
+
+body.swal2-height-auto {
+  height: 100% !important
+}
+
+.swal2-validation-message {
+  background-color: #171717 !important;
+  color: #fff;
 }
