@@ -36,6 +36,40 @@ export const pressEnterLeaveSlide = trigger('pressEnterLeaveSlide', [
   ])
 ])
 
+export const containerEnterLeaveOpacity = trigger('containerEnterLeaveOpacity', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate(
+      '250ms ease-out',
+      style({ opacity: 0.8 })
+    )
+  ]),
+  transition(':leave', [
+    style({ opacity: 0.8 }),
+    animate(
+      '250ms ease-out',
+      style({ opacity: 0 })
+    )
+  ])
+])
+
+export const modalEnterLeaveSlide = trigger('modalEnterLeaveSlide', [
+  transition(':enter', [
+    style({ transform: 'translateY(-100%)', opacity: 0 }),
+    animate(
+      '250ms ease-out',
+      style({ transform: 'translateY(0)', opacity: 1 })
+    )
+  ]),
+  transition(':leave', [
+    style({ transform: 'translateY(0)', opacity: 1 }),
+    animate(
+      '250ms ease-out',
+      style({ transform: 'translateY(-100%)', opacity: 0 })
+    )
+  ])
+])
+
 export const containerTranslationEnterSlideDown = trigger('containerTranslationEnterSlideDown', [
   transition(':enter', [
     style({ transform: 'translateY(-25%)', opacity: 0 }),
